@@ -1,0 +1,7 @@
+spring:
+    profiles:
+        active:
+            - dev
+        include: common
+app:
+  email: development@email.com
