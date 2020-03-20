@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <title>Drools + React + Spring Boot</title>
+</head>
+<body class="container-fluid">
+	<!-- React will insert the elements into this root tag -->
+	<br/><br/><br/>
+	<div class="align-center" id='root'></div>
+	
+ 	<script src="https://fb.me/react-15.0.1.js"></script>
+    <script src="https://fb.me/react-dom-15.0.1.js"></script>
+    <!-- babel is a javascript traspiler. it turns ES6 code to ES5 code that runs in browser -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+ 	  <script type="text/babel">
+
+
+
+	// we need to tell react to insert the parent component elements into root element
+	// this is done using ReactDom.render() method
+	// provide the variable name as
+
+
+	var EmployeeTable = React.createClass({
+
+		checkValue: function() {
+			console.log('checkValue func()');
+
+			var inpVal = $('#inpVal').val();
+			console.log(inpVal);
+			var self = this;
+    $.ajax({
+      url: "/drools?value="+inpVal,
+      crossDomain: true,
+      dataType: 'json',
+      contentType: "application/json",
+    }).then(function (data) {
+    	console.log('rest data');
+    	console.log(data);
+    	self.setState({resp: data});
+			$('#status').html(data.desc);
+		if(data.succ == true) {
+			$('#status').addClass('alert alert-success');
+		} else {
+			$('#status').addClass('alert alert-danger');
+		}
+    });
+		},
+
+		getInitialState() {
+    	return {resp: []};
+		},
+
+		render: function() {
+	    return (
+				<div className="form-group">
+					<label for="inpVal">Enter CreditScore: </label>
+					<input className="form-control" id="inpVal" type="text" placeholder="Enter CreditScore"/><br />
+					<span id="status" /><br/><br /><br/>
+					<button id="button" className="btn btn-sm btn-primary btn-warning" onClick={this.checkValue}>Check</button>
+				</div>
+		);
+	  	}
+		});
+
+	var App = React.createClass({
+
+	  loadEmployeesFromServer: function () {
+
+	  },
+
+	  getInitialState: function () {
+	    return {employees: []};
+	  },
+
+	  componentDidMount: function () {
+	  //  this.loadEmployeesFromServer();
+	  },
+
+	  render() {
+	    return ( <EmployeeTable /> );
+	  }
+	});
+
+	ReactDOM.render(<App />, document.getElementById('root') );
+
+
+	</script>
+</body>
+</html>
