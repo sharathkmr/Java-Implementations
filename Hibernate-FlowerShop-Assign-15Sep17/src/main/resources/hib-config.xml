@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<property name="hbm2ddl.auto">update</property>
+		<property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
+		<property name="connection.driverClass">oracle.jdbc.driver.OracleDriver</property>
+		<property name="connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+		<property name="connection.username">sharath</property>
+		<property name="connection.password">*****</property>
+		<property name="hibernate.current_session_context_class">thread</property>
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+		<mapping class="com.hib.assign.model.Manager" />
+		<mapping class="com.hib.assign.model.FlowerShop" />
+	</session-factory>
+</hibernate-configuration>
