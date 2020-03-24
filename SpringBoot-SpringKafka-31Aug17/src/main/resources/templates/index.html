@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link data-require="bootstrap@4.0.5" data-semver="4.0.5" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
+    <script data-require="bootstrap@4.0.5" data-semver="4.0.5" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+  </head>
+
+  <body class="container">
+  <h2>Spring Kafka Example</h2>
+    <div class="row">
+      <div class="col-md-4 shadow-depth-2">
+        <h4 class="text-center">Producer</h4>
+        <div class="msngr_body" id="messages_producer">
+        	<span class="text-center" th:text="${msg}"></span>
+        </div>
+        <div>
+        	<form action="#" th:action="@{/sendMessage}" th:object="${message}" method="post">
+          <input type="form-control" placeHolder="Enter Message" th:field="*{msg}"/>
+          <input class="btn btn-success btn-sm" type="submit" value="Submit" />
+          </form>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-4 shadow-depth-2">
+        <h4 class="text-center">Consumer</h4>
+        <div class="msngr_body" id="messages_consumer"></div>
+      </div>
+    </div>
+  </body>
+
+</html>
